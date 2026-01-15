@@ -120,7 +120,7 @@ Wazuh alert example:
 
 ## Reports & evidence
 - `reports/` — Project-Summary.md, SOC-Incident-Report.md, MITRE-Mapping.md, Triage-Notes.md
-- `screenshots/` — Dashboard and alert screenshots
+
 
 ---
 
