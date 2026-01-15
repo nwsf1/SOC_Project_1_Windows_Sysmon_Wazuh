@@ -1,0 +1,12 @@
+Event ID: 1 (ProcessCreate)
+Image: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+CommandLine: powershell -nop -w hidden -enc SQBFAFgA...
+
+Event ID: 22 (DnsQuery)
+QueryName: c2.malicious-domain.xyz
+Image: powershell.exe
+
+Event ID: 3 (NetworkConnect)
+DestinationIp: 185.199.108.153
+DestinationPort: 443
+Image: powershell.exe
