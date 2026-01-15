@@ -1,13 +1,36 @@
 <Sysmon schemaversion="4.90">
+  <!-- High-signal ruleset optimized for SOC analysis -->
+  <HashAlgorithms>md5,sha256</HashAlgorithms>
+  <CheckRevocation>False</CheckRevocation>
+
   <EventFiltering>
-    <ProcessCreate onmatch="include" />
-    <FileCreateTime onmatch="include" />
-    <NetworkConnect onmatch="include" />
-    <DriverLoad onmatch="include" />
-    <ImageLoad onmatch="include" />
-    <CreateRemoteThread onmatch="include" />
-    <RawAccessRead onmatch="include" />
-    <ProcessAccess onmatch="include" />
-    <FileCreate onmatch="include" />
+
+    <!-- PROCESS CREATION -->
+    <ProcessCreate onmatch="include">
+      <ParentImage condition="contains">powershell</ParentImage>
+      <Image condition="contains">powershell</Image>
+      <CommandLine condition="contains">-enc</CommandLine>
+      <CommandLine condition="contains">invoke-webrequest</CommandLine>
+      <CommandLine condition="contains">download</CommandLine>
+    </ProcessCreate>
+
+    <!-- NETWORK CONNECTION -->
+    <NetworkConnect onmatch="include">
+      <Image condition="end with">powershell.exe</Image>
+      <DestinationPort condition="is">443</DestinationPort>
+      <DestinationHostname condition="contains">c2</DestinationHostname>
+    </NetworkConnect>
+
+    <!-- DNS QUERY -->
+    <DnsQuery onmatch="include">
+      <QueryName condition="contains">malicious</QueryName>
+      <QueryName condition="contains">c2</QueryName>
+    </DnsQuery>
+
+    <!-- FILE CREATE -->
+    <FileCreate onmatch="exclude">
+      <Image condition="contains">Windows\\Installer</Image>
+    </FileCreate>
+
   </EventFiltering>
 </Sysmon>
