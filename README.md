@@ -1,117 +1,117 @@
-# SOC Project 1 — Windows Endpoint Monitoring with Sysmon + Wazuh (Cloud)
+# 🛡 SOC Project 1 — Windows Sysmon + Wazuh Cloud  
+**Complete Endpoint Detection & Telemetry Pipeline (SOC Portfolio Project)**  
 
-## 🛡️ Overview
-This project demonstrates the setup, configuration, and analysis of Windows endpoint security monitoring using **Sysmon** for detailed host telemetry and **Wazuh Cloud** for centralized SIEM/SOC processing.  
-
-The goal of this project is to simulate a real SOC analyst workflow:
-- Deploy agent-based telemetry  
-- Collect Sysmon security events  
-- Build detection rules  
-- Investigate suspicious activity  
-- Produce a professional SOC report  
+![Status](https://img.shields.io/badge/Project-Active-brightgreen)
+![Sysmon](https://img.shields.io/badge/Sysmon-15.14-blue)
+![Wazuh](https://img.shields.io/badge/Wazuh-4.14-purple)
+![Windows](https://img.shields.io/badge/Windows-11-lightgrey)
+![MITRE ATT&CK](https://img.shields.io/badge/MITRE%20ATT%26CK-Mapped-orange)
 
 ---
 
-# 🔧 Architecture
+## 📌 Project Overview
+This project demonstrates a **real-world SOC detection pipeline** using:
 
-```
-Windows 11 Endpoint  
-    |  
-    | Sysmon (Event Logging)  
-    ↓  
-Wazuh Agent  
-    | Sends encrypted logs  
-    ↓  
-Wazuh Cloud SIEM  
-    |  
-    ↓  
-Dashboards, Alerts, Correlation, MITRE ATT&CK
-```
+- **Sysmon** for advanced Windows event telemetry  
+- **Wazuh Cloud** for log ingestion, rule processing & alerting  
+- **Custom detection engineering** mapped to MITRE ATT&CK  
+- **Threat simulations** including:
+  - Encoded PowerShell execution  
+  - DNS-based C2 beaconing  
+
+This project mirrors what Tier 1–2 SOC Analysts do:  
+**collect logs → normalize → detect → triage → document.**
 
 ---
 
-# 📁 Project Structure
+## 📁 Repository Structure
 
 ```
 SOC_Project_1_Windows_Sysmon_Wazuh/
 │
-├── configs/
-│   ├── sysmon-config.xml
-│   ├── wazuh-agent.conf
-│   ├── custom-rules.xml
-│   ├── decoders.xml
-│
-├── detection-lab/
-│   ├── attack-scenario-1.md
-│   ├── attack-scenario-2.md
-│   ├── example-sysmon-logs.txt
-│
-├── reports/
-│   ├── SOC-Incident-Report.md
-│   ├── Project-Summary.md
-│
-├── screenshots/
-│   ├── wazuh-dashboard.png
-│   ├── sysmon-events.png
-│   ├── detection-alert.png
-│
-└── README.md
+├── configs/                 # Sysmon + Wazuh config files
+├── detection-lab/           # Attack scenarios, logs, simulation instructions
+├── architecture/            # Data flow & architecture diagrams
+├── reports/                 # SOC incident reports & project summary
+├── screenshots/             # Screenshots to support documentation
+└── README.md                # This file
 ```
 
 ---
 
-# 🧰 Tools Used
-- **Sysmon v15.15**
-- **Wazuh Agent v4.14**
-- **Wazuh Cloud Console**
-- **MITRE ATT&CK Mapping**
-- **PowerShell**
-- **Event Viewer**
-- **Windows 11 Endpoint (Test Machine)**
+## 🚀 Key Features
+
+### ✔ Sysmon Telemetry  
+Captures:
+- Process Creation (ID 1)  
+- Network Connections (ID 3)  
+- DNS Queries (ID 22)  
+- File & Registry events  
+
+### ✔ Wazuh Cloud SIEM  
+- Real-time log ingestion  
+- MITRE mapping  
+- Custom detection rules  
+- Threat Hunting query console  
+
+### ✔ Custom Detection Rules  
+Included in `/configs/custom_rules.xml`:
+
+| Rule ID | Description | MITRE |
+|---------|-------------|--------|
+| **900001** | Encoded PowerShell execution | T1059.001 |
+| **900003** | DNS C2-like repeated queries | T1071.004 |
 
 ---
 
-# 📊 Detection Use Cases Implemented
+## 🧪 Detection Lab Scenarios
+Stored inside:  
+➡ `detection-lab/`
 
-### 🔍 1. Suspicious Process Creation (Sysmon Event ID 1)
-Detects:
-- LOLBins (cmd, powershell, wmic, regsvr32)
-- Unsigned binaries in user directories
-- Suspicious parent-child relationships
+### **Scenario 1 — Encoded PowerShell Execution**
+Simulates obfuscated payload execution using:
 
-### 📁 2. File Modification (Sysmon Event ID 2 + Wazuh Syscheck)
-Detects:
-- Unauthorized EXE creation  
-- Startup persistence  
-- Registry autoruns  
+```
+powershell.exe -nop -w hidden -enc <payload>
+```
 
-### 🌐 3. Network Connections (Sysmon Event ID 3)
-Detects:
-- Outbound C2 patterns  
-- Unknown remote IP connections  
+### **Scenario 2 — DNS C2 Beaconing**
+Simulates repeated suspicious DNS requests:
 
----
-
-# 🧪 Attack Simulations Performed
-- Suspicious PowerShell execution  
-- Creation of unauthorized EXE in Desktop folder  
-- Network connection to unknown IP  
-- Registry autorun modification  
+```
+while ($true) { Resolve-DnsName "c2.malicious-domain.xyz"; sleep 5 }
+```
 
 ---
 
-# 📈 Results
-All attacks successfully generated Sysmon logs, which were collected by Wazuh and produced alerts.
+## 📊 Sample Outputs
 
-Screenshots, logs, and alerts are included in the project folders.
+### **Sysmon Log Example**
+```
+Event ID: 1 (ProcessCreate)
+Image: powershell.exe
+CommandLine: -enc SQBFAFgA...
+```
+
+### **Wazuh Alert Example**
+```
+Rule: 900001
+Level: 10
+Description: Suspicious PowerShell encoded command detected
+MITRE: T1059.001
+```
 
 ---
 
-# 📝 Conclusion
-This project demonstrates:
-✔ Ability to configure enterprise endpoint security telemetry  
-✔ Practical SIEM/SOC investigation workflow  
-✔ Creation of custom detection rules  
-✔ Documentation similar to real SOC environments  
+## 📘 Reports Included
+Located in `/reports/`:
+
+- **Project-Summary.md**  
+- **SOC-Incident-Report.md**  
+- MITRE mapping tables  
+- Analyst triage notes  
 
 ---
+
+## 🧠 Skills Demonstrated
+- Threat detection eng
