@@ -1,3 +1,12 @@
-<decoder name="sysmon">
-    <program_name>Sysmon</program_name>
+<decoder name="sysmon-eventchannel">
+    <program_name>eventchannel</program_name>
+    <type>sysmon</type>
+</decoder>
+
+<decoder name="windows-eventchannel">
+    <program_name>eventchannel</program_name>
+</decoder>
+
+<decoder name="powershell-scriptblock">
+    <regex>ScriptBlockText</regex>
 </decoder>
