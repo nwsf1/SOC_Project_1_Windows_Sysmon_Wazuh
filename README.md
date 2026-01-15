@@ -114,4 +114,25 @@ Located in `/reports/`:
 ---
 
 ## 🧠 Skills Demonstrated
-- Threat detection eng
+- Threat detection engineering  
+- SIEM configuration & tuning  
+- Telemetry analysis  
+- Windows event channel monitoring  
+- MITRE ATT&CK mapping  
+- SOC reporting & documentation  
+
+---
+
+## 🏁 Conclusion
+This project simulates a complete SOC workflow, showcasing real-world ability to:
+
+✔ Deploy Sysmon  
+✔ Configure Wazuh  
+✔ Build detections  
+✔ Test with simulations  
+✔ Produce SOC-quality incident documentation  
+
+---
+
+## 📬 Contact
+If reviewing for hiring purposes, feel free to reach out via GitHub Issues or email.
