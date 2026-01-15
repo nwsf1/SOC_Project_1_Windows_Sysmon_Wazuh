@@ -1,0 +1,3 @@
+<decoder name="sysmon">
+    <program_name>Sysmon</program_name>
+</decoder>
